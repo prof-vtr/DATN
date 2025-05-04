@@ -1,0 +1,52 @@
+﻿@model DoAnNguyenVanTruong.Models.Brand
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Tạo mới danh mục</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="/Admin/Dashboard"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="/Brands/Index"><div class="text-tiny">danh mục</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Tạo mới danh mục</div>
+                </li>
+            </ul>
+        </div>
+        <!-- new-attribute -->
+        <div class="wg-box">
+            <form action="/Brands/Create" method="post" class="form-new-product form-style-1">
+                @Html.AntiForgeryToken()
+                
+                <fieldset class="name">
+                    <div class="body-title">Brand Name</div>
+                    <input class="flex-grow" type="text" placeholder="BrandName" name="BrandName" tabindex="0" value="" aria-required="true" required="">
+                </fieldset>
+                <div class="bot">
+                    <div></div>
+                    <button class="tf-button w208" type="submit">Thêm mới</button>
+                </div>
+            </form>
+        </div>
+        <!-- /new-category -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>

@@ -1,0 +1,116 @@
+﻿@model DoAnNguyenVanTruong.Models.User
+@{
+    ViewBag.Title = "Account";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<style>
+    .tong {
+        width: 100%;
+        display: flex;
+        margin-left: 50px;
+        box-sizing: border-box;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        height: 500px;
+    }
+
+    .infor_account {
+        width: 70%;
+        padding: 10px;
+        box-shadow: 5px 10px #8fc2e9db;
+        border-radius: 10px;
+        margin-left: 150px;
+        border: 1px solid;
+    }
+
+    .menu_account {
+        width: 200px;
+        box-sizing: border-box;
+    }
+
+        .menu_account ul {
+            list-style-type: none;
+            width: 100%;
+            border: 1px solid;
+            box-shadow: 5px 10px #8fc2e9db;
+            border-radius: 10px;
+            padding: 0;
+        }
+
+            .menu_account ul li {
+                width: 100%;
+                height: 50px;
+                text-align: center;
+                padding: 15px;
+            }
+
+                .menu_account ul li:hover {
+                    border: 1px solid;
+                    box-shadow: 1px 1px #8fc2e9db;
+                    border-radius: 10px;
+                }
+
+                .menu_account ul li a {
+                    margin-top: 50%;
+                    text-decoration: none;
+                    text-align: center;
+                }
+</style>
+<div class="tong">
+    <div class="menu_account">
+
+        <div class="menu-list">
+            <ul>
+                <a href="/Page/Account">
+                <li>
+                    <i class="ti-user"></i>&nbsp; Thông tin tài khoản
+                </li>
+                </a>
+                <a href="/Page/My_order">
+                <li>
+                    <i class="ti-package"></i>&nbsp; Đơn hàng của bạn
+                </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="infor_account">
+        <table>
+            <tr>
+                <td class="title">Email:</td>
+                <td>@Model.Email</td>
+            </tr>
+            <tr>
+                <td class="title">Họ và Tên:</td>
+                <td>@Model.Username</td>
+            </tr>
+            <tr>
+                <td class="title">Giới tính: </td>
+                <td>@Model.Gender</td>
+            </tr>
+            <tr>
+                <td class="title">Vai trò:</td>
+                <td>@ViewBag.role</td>
+            </tr>
+
+        </table>
+
+    </div>
+</div>
+<div class="btn_account">
+
+</div>
+<style>
+    .infor_account table {
+        width: 100%;
+        height: 100%;
+    }
+
+        .infor_account table tr {
+            
+        }
+
+        .infor_account table .title {
+            width: 100px;
+        }
+</style>

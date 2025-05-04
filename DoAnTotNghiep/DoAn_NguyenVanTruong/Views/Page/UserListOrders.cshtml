@@ -1,0 +1,194 @@
+﻿@model DoAnNguyenVanTruong.ViewModel.OrderListViewModel
+@{
+    ViewBag.Title = "UserListOrders";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<style>
+    /* Custom CSS for Orders List page */
+    .wishlist-area {
+        padding-top: 100px;
+        padding-bottom: 100px;
+    }
+
+    .wishlist-table {
+        margin-top: 30px;
+    }
+
+        .wishlist-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .wishlist-table th,
+        .wishlist-table td {
+            text-align: left;
+            padding: 15px;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .wishlist-table th {
+            background-color: #f8f8f8;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: uppercase;
+        }
+
+    .order-details a {
+        color: #007bff;
+        text-decoration: none;
+    }
+
+    .mainmenu__nav .meninmenu li a {
+        color: white;
+    }
+
+    /* Style for order status cells */
+    .order-status {
+        text-align: center;
+        font-weight: bold;
+        text-transform: capitalize;
+    }
+
+        /* Style for the "delevering" status */
+        .order-status.delivering {
+            color: #007bff;
+        }
+
+        /* Style for the "Processing" status */
+        .order-status.processing {
+            color: #ffc107;
+        }
+
+        /* Style for the "Cancelled" status */
+        .order-status.cancelled {
+            color: #dc3545;
+        }
+
+        /* Style for the "Completed" status */
+        .order-status.completed {
+            color: #28a745;
+        }
+</style>
+
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--6" style="background-image: url('/assets/images/logo/bradcaump5.jpg') !important; background-repeat: no-repeat; background-size: cover; background-position: center center; }">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title" style="color: #333 !important">Danh sách đơn hàng</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="/Page/Index" style="color: #333 !important">Trang chủ</a>
+                        <span class="brd-separetor" style="color: #333 !important">/</span>
+                        <span class="breadcrumb_item active">Danh sách đơn hàng</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+
+<!-- orders-list-main-area start -->
+<div class="wishlist-area section-padding--lg bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="wishlist-content">
+                    <form action="#">
+                        <div class="wishlist-table wnro__table table-responsive">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th class="order-id">
+                                            <span class="nobr">Mã đơn hàng</span>
+                                        </th>
+                                        <th class="order-date">
+                                            <span class="nobr">Ngày tạo</span>
+                                        </th>
+                                        <th class="order-amount">
+                                            <span class="nobr">Tổng tiền</span>
+                                        </th>
+                                        <th class="payment-method">
+                                            <span class="nobr">Phương thức</span>
+                                        </th>
+                                        <th class="order-status">
+                                            <span class="nobr">Tình trạng</span>
+                                        </th>
+                                        <th class="order-details"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item in Model.Orders)
+                                    {
+                                        <tr>
+                                            <td class="order-id">
+                                                @item.OrderCode
+                                            </td>
+                                            <td class="order-date">
+                                                @item.OrderDate.ToString("hh:mm:ss dd/MM/yyyy")
+                                            </td>
+                                            <td class="order-amount">
+                                                @String.Format("{0:0,0 đ}", item.OrderTotalPrice)
+                                            </td>
+                                            <td class="payment-method">
+                                                @{
+                                                    string method = "";
+                                                    if (item.TypePayment == 0)
+                                                    {
+                                                        method = "COD";
+                                                    }
+                                                    if (item.TypePayment == 1)
+                                                    {
+                                                        method = "VNPAY";
+                                                    }
+                                                }
+                                                @method
+                                            </td>
+                                            <td class="order-status delivering">
+                                                @{
+                                                    string status = "";
+                                                    if (item.OrderStatus == "0")
+                                                    {
+                                                        status = "Chưa thanh toán";
+                                                    }
+                                                    else if (item.OrderStatus == "1")
+                                                    {
+                                                        status = "Đã thanh toán";
+                                                    }
+                                                    else if (item.OrderStatus == "2")
+                                                    {
+                                                        status = "Đã xác nhận";
+                                                    }
+                                                    else if (item.OrderStatus == "3")
+                                                    {
+                                                        status = "Đang giao hàng";
+                                                    }
+                                                    else if (item.OrderStatus == "4")
+                                                    {
+                                                        status = "Đã giao hàng";
+                                                    }
+                                                    else if (item.OrderStatus == "5")
+                                                    {
+                                                        status = "Đã huỷ";
+                                                    }
+                                                }
+                                                @status
+                                            </td>
+                                            <td class="order-details">
+                                                <a href="@Url.Action("OrderDetail", "Page", new { orderId = item.OrderID} )">xem chi tiết</a>
+                                            </td>
+                                        </tr>
+                                    }
+
+                                </tbody>
+                            </table>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- orders-list-main-area end -->

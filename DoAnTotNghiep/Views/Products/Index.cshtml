@@ -1,0 +1,95 @@
+﻿@model IEnumerable<DoAn_TranTheAnh_2020607026.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+@*<style>
+
+    .nut a {
+        display: inline-block;
+        text-align: center;
+        padding: 5px 15px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        margin-bottom: 5px;
+        color: black;
+        background-color: #fff;
+        text-decoration: none;
+        &:hover
+
+    {
+        color: #fff;
+        background-color: #000;
+    }
+
+    &:active {
+        background-color: #ddd;
+    }
+    }
+</style>*@
+
+<p class="nut" >
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table" align="center">
+    <tr style="background-color: antiquewhite; align-content:center; align-items:center;">
+        <th class="text">
+            @Html.DisplayNameFor(model => model.Brand.BrandName)
+        </th>
+        <th class="text">
+            @Html.DisplayNameFor(model => model.Category.CategoryName)
+        </th>
+        <th class="text">
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th class="text">
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th class="text">
+            @Html.DisplayNameFor(model => model.Price)
+        </th>
+        <th class="text">
+            @Html.DisplayNameFor(model => model.QuantityInStock)
+        </th>
+        <th class="text">
+            @Html.DisplayNameFor(model => model.Images)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td class="text">
+                @Html.DisplayFor(modelItem => item.Brand.BrandName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Category.CategoryName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.QuantityInStock)
+            </td>
+            <td>
+                <img width="100px" height="100px" src="~/assets/images/product/@item.Images" />
+            </td>
+            <td class="nut">
+                @Html.ActionLink("Sửa", "Edit", new { id = item.ProductID }) <br />
+                @Html.ActionLink("Chi tết ", "Details", new { id = item.ProductID }) <br />
+                @Html.ActionLink("Xoá", "Delete", new { id = item.ProductID })<br />
+
+            </td>
+        </tr>
+    }
+
+</table>

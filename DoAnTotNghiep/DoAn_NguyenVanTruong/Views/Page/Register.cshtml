@@ -1,0 +1,82 @@
+﻿@model DoAnNguyenVanTruong.ViewModel.IndexViewModel﻿
+
+@{
+    ViewBag.Title = "Register";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--6" style="background-image: url('/assets/images/logo/bradcaump5.jpg') !important; background-repeat: no-repeat; background-size: cover; background-position: center center; }">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title" style="color: #333 !important">Đăng ký</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="/Page/Index" style="color: #333 !important">Trang chủ</a>
+                        <span class="brd-separetor" style="color: #333 !important">/</span>
+                        <span class="breadcrumb_item active">Đăng ký</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- Start My Account Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-lg-6 col-12">
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Đăng ký</h3>
+
+                    <div class="account__form">
+                        @{
+                            if (ViewBag.errorpassword != null)
+                            {
+                                <span style="color:red; font-size: 14px">@ViewBag.errorpassword</span>
+                            }
+                        }
+                        <form action="/Page/Register" method="post">
+                            <div class="input__box">
+                                <label style="font-size: 14px">Họ<span>*</span></label>
+                                <input type="text" name="firstName" aria-required="true" required="">
+                            </div>
+                            <div class="input__box">
+                                <label style="font-size: 14px">Tên<span>*</span></label>
+                                <input type="text" name="lastName" aria-required="true" required="">
+                            </div>
+                            <div class="input__box">
+                                <label style="font-size: 14px">Email<span>*</span></label>
+                                <input type="email" name="Email" aria-required="true" required="">
+                            </div>
+                            <div class="input__box">
+                                <label style="font-size: 14px">Mật khẩu<span>*</span></label>
+                                <input type="password" name="password" aria-required="true" required="">
+                            </div>
+                            <div class="input__box">
+                                <label style="font-size: 14px">Xác nhận mật khẩu<span>*</span></label>
+                                <input type="password" name="confirmpassword" aria-required="true" required="">
+                            </div>
+                            <div class="input__box mb-3">
+                                <label style="font-size: 14px">Giới tính<span>*</span></label>
+                                <select name="Gender" aria-required="true" required="" style="width: 100%; padding: 10px;">
+                                    <option value="" disabled selected>Chọn giới tính</option>
+                                    <option value="male">Nam</option>
+                                    <option value="female">Nữ</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+                            <div class="form__btn mb-3" style="margin-top: 30px">
+                                <button>Đăng ký</button>
+                            </div>
+                        </form>
+                        <span class="forget_pass" style="color: black; display: inline; font-size: 14px;">Đã có tài khoản? Đăng nhập <a class="forget_pass" style="display: inline; font-size: 14px;" href="/Page/Login">tại đây</a></span>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End My Account Area -->

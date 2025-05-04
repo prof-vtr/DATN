@@ -1,0 +1,13 @@
+﻿@model IEnumerable<DoAnNguyenVanTruong.Models.Category>
+@foreach (var item in Model)
+{
+    <li style="box-sizing:border-box;">
+        <a href="@Url.Action("ListproductCategory","Page", new {id = item.CategoryID})" class="img_container">
+            <img src="~/assets/images/category/@item.Images" data-src="~/assets/im/banner_1.jpg" alt="" class="lazy">
+            <div class="short_info opacity-mask" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                <h3>@item.CategoryName</h3>
+                <div><span class="btn_1">Shop Now</span></div>
+            </div>
+        </a>
+    </li>
+}

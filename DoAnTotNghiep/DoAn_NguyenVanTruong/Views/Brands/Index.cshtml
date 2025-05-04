@@ -1,0 +1,101 @@
+﻿﻿﻿﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<DoAnNguyenVanTruong.Models.Brand>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Danh sách thương hiệu</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="/Admin/Dashboard"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="/Brands/Index"><div class="text-tiny">Thương hiệu</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Danh sách thương hiệu</div>
+                </li>
+            </ul>
+        </div>
+        <!-- all-attribute -->
+        <div class="wg-box">
+            <div class="flex items-center justify-between gap10 flex-wrap">
+                <div class="wg-filter flex-grow">
+                </div>
+                <a class="tf-button style-1 w208" href="/Brands/Create"><i class="icon-plus"></i>Thêm mới</a>
+            </div>
+            <div class="wg-table table-all-attribute">
+                <ul class="table-title flex gap20 mb-14">
+                    <li>
+                        <div class="body-title">Mã thương hiệu</div>
+                    </li>
+                    <li>
+                        <div class="body-title">Tên thương hiệu</div>
+                    </li>
+                    <li>
+                        <div class="body-title"></div>
+                    </li>
+                </ul>
+                <ul class="flex flex-column">
+                    @foreach (var item in Model)
+                    {
+                        <li class="attribute-item flex items-center justify-between gap20">
+                            <div class="name">
+                                <a href="/Brands/Details" class="body-title-2">@item.BrandID</a>
+                            </div>
+                            <div class="body-text">@item.BrandName</div>
+                            <div class="list-icon-function">
+                                <div class="item eye">
+                                    <a href="/Brands/Details/@item.BrandID">
+                                        <i class="icon-eye"></i>
+                                    </a>
+
+                                </div>
+                                <div class="item edit">
+                                    <a href="/Brands/Edit/@item.BrandID">
+                                        <i class="icon-edit-3"></i>
+                                    </a>
+
+                                </div>
+                                <div class="item trash">
+                                    <a href="/Brands/Delete/@item.BrandID">
+                                        <i class="icon-trash-2"></i>
+                                    </a>
+
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between flex-wrap gap10">
+                <div class="text-tiny"></div>
+                <ul class="wg-pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, PageSize = 8 }))
+                </ul>
+            </div>
+        </div>
+        <!-- /all-attribute -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<!-- /main-content-wrap -->
+<!-- bottom-page -->
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Remos. Design with</div>
+    <i class="icon-heart"></i>
+</div>

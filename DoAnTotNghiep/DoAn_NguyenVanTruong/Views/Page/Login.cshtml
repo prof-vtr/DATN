@@ -1,0 +1,65 @@
+﻿﻿@using PagedList.Mvc;
+@using PagedList;
+@model DoAnNguyenVanTruong.ViewModel.IndexViewModel
+@{
+    ViewBag.Title = "Login";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--6" style="background-image: url('/assets/images/logo/bradcaump5.jpg') !important; background-repeat: no-repeat; background-size: cover; background-position: center center; }">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title" style="color: #333 !important">Đăng nhập</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="/Page/Index" style="color: #333 !important">Trang chủ</a>
+                        <span class="brd-separetor" style="color: #333 !important">/</span>
+                        <span class="breadcrumb_item active">Đăng nhập</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+
+<!-- Start My Account Area -->
+<section class="my_account_area pt--80 pb--55 bg--white">
+    <div class="container">
+        <div class="row d-flex justify-content-center align-items-center">
+            <div class="col-lg-6 col-12">
+                <div class="my__account__wrapper">
+                    <h3 class="account__title">Đăng nhập</h3>
+
+                    @using (Html.BeginForm("Login", "Page", FormMethod.Post))
+                    {
+                        <div class="account__form">
+                            @{
+                                if (ViewBag.erorr != null)
+                                {
+                                    <span style="color:red; font-size: 14px">@ViewBag.erorr</span>
+                                }
+                            }
+                            <div class="input__box">
+                                <label style="font-size: 14px">Email<span>*</span></label>
+                                <input type="text" name="Email" aria-required="true" required="">
+                            </div>
+                            <div class="input__box">
+                                <label style="font-size: 14px">Mật khẩu<span>*</span></label>
+                                <input type="password" name="Password" aria-required="true" required="">
+                            </div>
+                            <div class="form__btn mb-3">
+                                <button>Đăng nhập</button>
+                            </div>
+                            <span class="forget_pass" style="color: black; display: inline; font-size: 14px;">Chưa có tài khoản? Hãy đăng ký ngay <a class="forget_pass" style="display: inline; font-size: 14px;" href="/Page/Register">tại đây</a></span>
+                        </div>
+                    }
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- End My Account Area -->

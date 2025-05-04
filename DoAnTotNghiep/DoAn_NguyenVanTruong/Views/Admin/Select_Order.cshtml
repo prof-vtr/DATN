@@ -1,0 +1,164 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<DoAnNguyenVanTruong.Models.Order>
+@{
+    ViewBag.Title = "Select_Order";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Danh sách đơn hàng</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="#"><div class="text-tiny">Dashboard</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="#"><div class="text-tiny">Order</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Order List</div>
+                </li>
+            </ul>
+        </div>
+        <!-- order-list -->
+        <div class="wg-box">
+            <div class="flex items-center justify-between gap10 flex-wrap">
+                <div class="wg-filter flex-grow">
+                    <div class="show">
+                        <div class="text-tiny">Lọc</div>
+                        <form action="/Admin/Select_Order" method="post" style="display:flex">
+                            <div class="select" style="display:flex;">
+                                <select name="Select_order" class="" style="width:200px;">
+                                    <option value="0">Chưa thanh toán</option>
+                                    <option value="1">Đã thanh toán</option>
+                                    <option value="2">Đã xác nhận</option>
+                                    <option value="3">Đang giao hàng</option>
+                                    <option value="4">Đã giao hàng</option>
+                                    <option value="5">Đã huỷ</option>
+                                </select>
+                            </div>
+                            <button class="tf-button style-1 w208" style="margin-left:20px;width:70px;">Lọc</button>
+                        </form>
+
+                    </div>
+                </div>
+                <a class="tf-button style-1 w208" href="oder-detail.html"><i class="icon-file-text"></i>Export all order</a>
+            </div>
+            <div class="wg-table table-all-category">
+                <ul class="table-title flex gap20 mb-14">
+                    <li>
+                        <div class="body-title">Tên khách hàng</div>
+                    </li>
+                    <li>
+                        <div class="body-title">Mã đơn hàng</div>
+                    </li>
+                    <li>
+                        <div class="body-title">Tổng tiền</div>
+                    </li>
+                    <li>
+                        <div class="body-title">Phương thức thanh toán</div>
+                    </li>
+                    <li>
+                        <div class="body-title">Trạng thái</div>
+                    </li>
+                    <li>
+                        <div class="body-title">Thời gian đặt hàng</div>
+                    </li>
+                    <li>
+                        <div class="body-title">Quản lý</div>
+                    </li>
+                </ul>
+                <ul class="flex flex-column">
+                    @foreach (var item in Model)
+                    {
+                        <li class="product-item gap14">
+                            <div class="image no-bg">
+                                <img src="~/assets/icon/customer.png" alt="">
+                            </div>
+                            <div class="flex items-center justify-between gap20 flex-grow">
+
+                                <div class="name">
+                                    <a href="@Url.Action("DetailOrder","Admin",new {id=item.OrderID})" class="body-title-2">@item.CustomerName</a>
+                                </div>
+                                <div class="body-text">@item.OrderCode</div>
+                                <div class="body-text">@String.Format("{0:0,0}", item.OrderTotalPrice)</div>
+                                @if (item.TypePayment == 0)
+                                {
+                                    <div class="body-text">COD</div>
+                                }
+
+
+                                @if (item.TypePayment > 0)
+                                {
+                                    <div class="body-text">Chuyển khoản</div>
+                                }
+
+
+                                @{
+                                    string status = "";
+                                    if (item.OrderStatus == "0")
+                                    {
+                                        status = "Chưa thanh toán";
+                                    }
+                                    else if (item.OrderStatus == "1")
+                                    {
+                                        status = "Đã thanh toán";
+                                    }
+                                    else if (item.OrderStatus == "2")
+                                    {
+                                        status = "Đã xác nhận";
+                                    }
+                                    else if (item.OrderStatus == "3")
+                                    {
+                                        status = "Đang giao hàng";
+                                    }
+                                    else if (item.OrderStatus == "4")
+                                    {
+                                        status = "Đã giao hàng";
+                                    }
+                                    else if (item.OrderStatus == "5")
+                                    {
+                                        status = "Đã huỷ";
+                                    }
+                                }
+                                <div>
+                                    <div class="block-available">@status</div>
+                                </div>
+                                <div>
+                                    <div class="block-tracking">@item.OrderDate</div>
+                                </div>
+                                <div class="list-icon-function">
+                                    <div class="item eye">
+                                        <a href="@Url.Action("DetailOrder","Admin",new {id=item.OrderID})">
+                                            <i class="icon-eye"></i>
+                                        </a>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between flex-wrap gap10">
+                <div class="text-tiny">Showing 10 entries</div>
+                <ul class="wg-pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Select_Order", "Admin", new { page, PageSize = 8 }))
+                </ul>
+            </div>
+        </div>
+        <!-- /order-list -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>

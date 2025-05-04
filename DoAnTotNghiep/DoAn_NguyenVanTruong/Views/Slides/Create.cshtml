@@ -1,0 +1,74 @@
+﻿@model DoAnNguyenVanTruong.Models.Slide
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Tạo Slide mới</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="@Url.Action("Dashboard","Admin")"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Slides")"><div class="text-tiny">Slide</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Tạo mới Slide</div>
+                </li>
+            </ul>
+        </div>
+        <!-- new-category -->
+        <div class="wg-box">
+            <form action="/Slides/Create" method="post" enctype="multipart/form-data" class="form-new-product form-style-1">
+                @Html.AntiForgeryToken()
+
+                <fieldset>
+                    <div class="body-title">Upload images <span class="tf-color-1">*</span></div>
+                    <div class="upload-image flex-grow">
+                        <div class="item up-load">
+                            <div class="item">
+                                <img id="output" src="~/assets/images/slide/" alt="" style="border-radius: 12px; border: 1px solid #ECF0F4" />
+                            </div>
+                            <label class="uploadfile" for="myFile">
+                                <span class="icon">
+                                    <i class="icon-upload-cloud"></i>
+                                </span>
+                                <span class="text-tiny"> <span class="tf-color">Tải file lên</span></span>
+                                <input name="ImageFile" id="myFile" type="file" onchange="LoadFile(event)" />
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+
+                <div class="bot">
+                    <div></div>
+                    <button class="tf-button w208" type="submit">Thêm mới Slide</button>
+                </div>
+            </form>
+        </div>
+        <!-- /new-category -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>
+<script>
+    var LoadFile = function (event) {
+        var image = document.getElementById("output");
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

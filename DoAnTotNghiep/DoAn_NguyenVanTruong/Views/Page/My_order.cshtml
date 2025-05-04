@@ -1,0 +1,187 @@
+﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<DoAnNguyenVanTruong.Models.Order>
+@{
+    ViewBag.Title = "My_order";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+@*<link rel="stylesheet" type="text/css" href="~/assets/css/animate.min.css">
+<link rel="stylesheet" type="text/css" href="~/assets/css/animation.css">
+<link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap-select.min.css">*@
+<link rel="stylesheet" type="text/css" href="~/assets/css/style.css">
+
+
+
+<style>
+    .tong {
+        width: 100%;
+        display: flex;
+        margin-left: 50px;
+        box-sizing: border-box;
+        margin-top: 100px;
+        margin-bottom: 100px;
+        height: 100%;
+    }
+
+    .infor_account {
+        width: 70%;
+        padding: 10px;
+        box-shadow: 5px 10px #8fc2e9db;
+        border-radius: 10px;
+        margin-left: 150px;
+        border: 1px solid;
+    }
+
+    .menu_account {
+        width: 200px;
+        box-sizing: border-box;
+    }
+
+        .menu_account ul {
+            list-style-type: none;
+            width: 100%;
+            border: 1px solid;
+            box-shadow: 5px 10px #8fc2e9db;
+            border-radius: 10px;
+            padding: 0;
+        }
+
+            .menu_account ul li {
+                width: 100%;
+                height: 50px;
+                text-align: center;
+                padding: 15px;
+            }
+
+                .menu_account ul li:hover {
+                    border: 1px solid;
+                    box-shadow: 1px 1px #8fc2e9db;
+                    border-radius: 10px;
+                }
+
+                .menu_account ul li a {
+                    margin-top: 50%;
+                    text-decoration: none;
+                    text-align: center;
+                }
+</style>
+<div class="tong">
+    <div class="menu_account">
+
+        <div class="menu-list">
+            <ul>
+                <a href="/Page/Account">
+                <li>
+                    <i class="ti-user"></i>&nbsp; My Profile
+                </li>
+                </a>
+                <a href="/Page/My_order">
+                <li>
+                    <i class="ti-package"></i>&nbsp; Orders
+                </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+    <div class="infor_account">
+        <div class="main-content-inner">
+            <!-- main-content-wrap -->
+            <!-- order-list -->
+            <div class="wg-box">
+
+                <div class="wg-table table-all-category">
+                    <ul class="table-title flex gap20 mb-14" style="min-width:151px;">
+                        <li  style="max-width:325px;">
+                            <div class="body-title">Đơn hàng</div>
+                        </li>
+
+                        <li>
+                            <div class="body-title">Giá</div>
+                        </li>
+                        <li>
+                            <div class="body-title">Phương thức thanh toán</div>
+                        </li>
+                        <li>
+                            <div class="body-title">Trạng thái</div>
+                        </li>
+                    </ul>
+                    <ul class="flex flex-column" style="min-width:151px;">
+                        @foreach (var item in Model)
+                        {
+                            <a href="@Url.Action("Detail_Order","Page", new {id=item.OrderID})">
+                            <li class="product-item gap14">
+                                <div class="image no-bg">
+                                    <img src="~/assets/icon/order.png" alt="">
+                                </div>
+                                <div class="flex items-center justify-between gap20 flex-grow">
+
+                                    <div class="name">
+                                        <a href="@Url.Action("Detail_Order","Page", new {id=item.OrderID})" class="body-title-2">@item.OrderCode</a>
+                                    </div>
+
+                                    <div class="body-text">@String.Format("{0:0,0}", item.OrderTotalPrice)</div>
+
+                                    @if (item.TypePayment == 0)
+                                    {
+                                        <div class="body-text">COD</div>
+                                    }
+                                    @if (item.TypePayment > 0)
+                                    {
+                                        <div class="body-text">Chuyển khoản</div>
+                                    }
+                                    @{
+                                        string status = "";
+                                        if (item.OrderStatus == 0)
+                                        {
+                                            status = "Chưa thanh toán";
+                                        }
+                                        else if (item.OrderStatus == 1)
+                                        {
+                                            status = "Đã thanh toán";
+                                        }
+                                        else if (item.OrderStatus == 2)
+                                        {
+                                            status = "Đã xác nhận";
+                                        }
+                                        else if (item.OrderStatus == 3)
+                                        {
+                                            status = "Đang giao hàng";
+                                        }
+                                        else if (item.OrderStatus == 4)
+                                        {
+                                            status = "Hoàn thành";
+                                        }
+                                        else if (item.OrderStatus == 5)
+                                        {
+                                            status = "Đã huỷ";
+                                        }
+                                    }
+                                    <div>
+                                        <div class="block-available">@status</div>
+                                    </div>
+                                </div>
+                            </li>
+                            </a>
+
+                        }
+
+
+                    </ul>
+                </div>
+                <div class="divider"></div>
+                <div class="flex items-center justify-between flex-wrap gap10">
+                    <div class="text-tiny"></div>
+                    <ul class="wg-pagination">
+                        @Html.PagedListPager(Model, page => Url.Action("My_order", "Page", new { page, PageSize = 4 }))
+                    </ul>
+                </div>
+            </div>
+            <!-- /order-list -->
+        </div>
+
+    </div>
+</div>
+
+<!-- /main-content-wrap -->
+

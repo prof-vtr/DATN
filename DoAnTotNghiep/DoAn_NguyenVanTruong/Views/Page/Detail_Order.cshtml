@@ -1,0 +1,96 @@
+﻿@model DoAnNguyenVanTruong.ViewModel.OrderDetailViewModel
+@{
+    ViewBag.Title = "Detail_Order";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+    DoAnNguyenVanTruong.Models.Order orders = ViewBag.code;
+}
+
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--6" style="background-image: url('/assets/images/logo/bradcaump5.jpg') !important; background-repeat: no-repeat; background-size: cover; background-position: center center; }">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title" style="color: #333 !important">Giỏ hàng</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="/Page/Index" style="color: #333 !important">Trang chủ</a>
+                        <span class="brd-separetor" style="color: #333 !important">/</span>
+                        <span class="breadcrumb_item active">Giỏ hàng</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- cart-main-area start -->
+<div class="cart-main-area section-padding--lg bg--white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 ol-lg-12">
+
+                <div class="table-content wnro__table table-responsive">
+                    <table>
+                        <thead>
+                            <tr class="title-top">
+                                <th class="product-thumbnail">Image</th>
+                                <th class="product-name">Product</th>
+                                <th class="product-price">Price</th>
+                                <th class="product-quantity">Quantity</th>
+                                <th class="product-subtotal">Total</th>
+                                <th class="product-remove">Remove</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var orderDetail in Model.OrderDetails)
+                            {
+                                <tr>
+                                    <td class="product-thumbnail">
+                                        <a>
+                                            <img alt="product img"
+                                                 src="~/assets/images/product/@orderDetail.Product_Size.Product.Images" />
+                                        </a>
+                                    </td>
+                                    <td class="product-name">
+                                        <a>@orderDetail.Product_Size.Product.ProductName</a>
+                                    </td>
+                                    <td class="product-price" id="total">
+                                        <span class="amount">@String.Format("{0:0,0 đ}", orderDetail.Product_Size.Product.newprice(orderDetail.Product_Size.Product.Price, orderDetail.Product_Size.Product.SaleOff))</span>
+                                    </td>
+                                    <td class="product-quantity">
+                                        <input type="number" value="@orderDetail.OrderQuantity" data-id="@orderDetail.Product_Size.ProductID" />
+                                    </td>
+
+                                    <td class="product-subtotal" id="sub-total" data-id="@orderDetail.Product_Size.ProductID">
+                                        @String.Format("{0:0,0 đ}", orderDetail.OrderQuantity * orderDetail.Product_Size.Product.newprice(orderDetail.Product_Size.Product.Price, orderDetail.Product_Size.Product.SaleOff))
+                                    </td>
+
+                                    <td class="product-remove">
+                                        <a style="cursor: pointer" onclick="removeItemFromCart(@orderDetail.Product_Size.ProductID)" data-id="@orderDetail.Product_Size.ProductID">X</a>
+                                    </td>
+                                </tr>
+
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="cartbox__btn">
+                    <ul class="cart__btn__list d-flex flex-wrap flex-md-nowrap flex-lg-nowrap justify-content-between">
+                        <li><a style="cursor: pointer" href="@Url.Action("CheckOut","Page")">Check Out</a></li>
+
+                        <li>
+                            <div class="cart__total__amount"
+                                 style="display: flex; gap: 50px; background-color: black">
+                                <span>Total</span>
+                                <span>@String.Format("{0:0,0 đ}", Model.OrderDetails.Sum(x => x.OrderQuantity * x.Product_Size.Product.newprice(x.Product_Size.Product.Price, x.Product_Size.Product.SaleOff)))</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- cart-main-area end -->

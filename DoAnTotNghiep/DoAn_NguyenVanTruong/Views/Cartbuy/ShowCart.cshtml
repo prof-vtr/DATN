@@ -1,0 +1,93 @@
+﻿@model IEnumerable<DoAnNguyenVanTruong.Models.CartItem>
+@{
+    ViewBag.Title = "ShowCart";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+@if (Model != null)
+{
+    <table class="table table-striped cart-list">
+        <thead>
+            <tr style="text-align:center;">
+                <th style="float:left;">
+                    Sản phẩm
+                </th>
+                @*<th>
+                    Size
+                </th>*@
+                <th>
+                    Gía tiền
+                </th>
+                <th>
+                    Số lượng mua
+                </th>
+                <th>
+                    
+                </th>
+
+            </tr>
+        </thead>
+
+
+        <tbody>
+            @foreach (var item in Model)
+            {
+
+                <tr style="text-align:center;">
+                    <td style="display: flex;">
+                        <div class="thumb_cart">
+                            <img src="~/assets/images/product/@item.Product_Size.Product.Images" class="lazy" alt="Image" style="width: 70ppx; height:70px;">
+                        </div>
+                        <span class="item_cart" style="margin-top:25px; margin-left:25px;">@item.Product_Size.Product.ProductName</span>
+                    </td>
+                    @*<td>@item.Product_Size.Size.NameSize</td>*@
+                    <td>
+                        <strong>
+                            @String.Format("{0:0,0 VND}", item.Product_Size.Product.newprice(item.Product_Size.Product.Price, item.Product_Size.Product.SaleOff))
+                        </strong>
+                    </td>
+                    <td>
+                        <div class="numbers-row">
+                            <input type="text" value="@item.QuantityProductSale" id="quantity_1" class="qty2" name="quantity_1">
+                            <a href="@Url.Action("UpdateCartup", "Cartbuy", new {id=item.Product_SizeID} )"><div class="inc button_inc">+</div></a>
+                            <a href="@Url.Action("UpdateCartdown","Cartbuy", new {id=item.Product_SizeID})"> <div class="dec button_inc">-</div></a>
+
+                        </div>
+                    </td>
+                    <td class="options" style="text-align: center;">
+                        <a href="@Url.Action("Delete_Products", "Cartbuy", new {id = item.Product_SizeID})">
+                            <img src="~/assets/icon/delete_10337516.png" style="width:30px;height:30px;"
+                                 @*<i class="ti-trash"></i>*@
+                        </a>
+                    </td>
+                </tr>
+
+
+            }
+        </tbody>
+        </table>
+        <div class="box_cart">
+            <div class="container">
+                <div class="row justify-content-end">
+                    <div class="col-xl-4 col-lg-4 col-md-6">
+                        <ul>
+                            <li>
+                                <span>Tổng Tiền: &nbsp;</span>@String.Format("{0:0,0 VND}", ViewBag.totalmoney)
+
+                            </li>
+
+                        </ul>
+                        <a href="@Url.Action("CheckOut","Cartbuy")" class="btn_1 full-width cart">Đặt hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        }
+        
+
+
+
+
+
+
+

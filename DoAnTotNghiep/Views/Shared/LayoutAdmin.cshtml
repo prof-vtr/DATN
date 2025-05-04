@@ -1,0 +1,289 @@
+﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<!--<![endif]-->
+<!-- Mirrored from themesflat.co/html/remos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Mar 2024 14:58:46 GMT -->
+<head>
+    <!-- Basic Page Needs -->
+    <meta charset="utf-8">
+    <!--[if IE]><meta http-equiv='X-UA-Compatible' content='IE=edge,chrome=1'><![endif]-->
+    <title>Admin Fashion</title>
+
+    <meta name="author" content="Fashion">
+
+    <!-- Mobile Specific Metas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <!-- Theme Style -->
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/animation.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/styleadmin.css">
+    <link rel="stylesheet" type="text/css" href="~/assets/css/StyleSheetAdmin.css" />
+
+
+    <!-- Font -->
+    <link rel="stylesheet" href="~/assets/font/fonts.css">
+
+    <!-- Icon -->
+    <link rel="stylesheet" href="~/assets/icon/styleadmin.css">
+
+    <!-- Favicon and Touch Icons  -->
+    <link rel="shortcut icon" href="~/assets/images/logo.jpg">
+    <link rel="apple-touch-icon-precomposed" href="~/assets/images/logo.jpg">
+
+</head>
+
+<body class="body">
+
+    <!-- #wrapper -->
+    <div id="wrapper">
+        <!-- #page -->
+        <div id="page" class="">
+            <!-- layout-wrap -->
+            <div class="layout-wrap">
+                <!-- preload -->
+                <div id="preload" class="preload-container">
+                    <div class="preloading">
+                        <span></span>
+                    </div>
+                </div>
+                <!-- /preload -->
+                <!-- section-menu-left -->
+                <div class="section-menu-left">
+                    <div class="box-logo" style="align-items:center;">
+                        <a href="@Url.Action("Dashboard","Admin")" class="main__logo" style="align-items:center;">
+                            <img style="margin-right: 82px; width: 68px; height: 44px; display: block; outline: none; border-radius:10px; " src="~/assets/images/logo.jpg" alt="logo__image">
+                        </a>
+                        <div class="button-show-hide">
+                            <i class="icon-menu-left"></i>
+                        </div>
+                    </div>
+                    <div class="center">
+                        <div class="center-item">
+                            <div class="center-heading">Main Home</div>
+                            <ul class="menu-list">
+                                <li class="menu-item active">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-grid"></i></div>
+                                        <div class="text">Dashboard</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="center-item">
+                            <div class="center-heading">All page</div>
+                            <ul class="menu-list">
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-shopping-cart"></i></div>
+                                        <div class="text">Ecommerce</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Create","Products")" class="">
+                                                <div class="text">Add Product</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Index","Products")" class="">
+                                                <div class="text">Product List</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-layers"></i></div>
+                                        <div class="text">Category</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Index","Categories")" class="">
+                                                <div class="text">Category list</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Index","Categories")" class="">
+                                                <div class="text">New category</div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-file-plus"></i></div>
+                                        <div class="text">Order</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Index","Orders")" class="">
+                                                <div class="text">Order list</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Detail","Orders")" class="">
+                                                <div class="text">Order detail</div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+                                <li class="menu-item has-children">
+                                    <a href="javascript:void(0);" class="menu-item-button">
+                                        <div class="icon"><i class="icon-user"></i></div>
+                                        <div class="text">User</div>
+                                    </a>
+                                    <ul class="sub-menu">
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Index","Users")" class="">
+                                                <div class="text">All user</div>
+                                            </a>
+                                        </li>
+                                        <li class="sub-menu-item">
+                                            <a href="@Url.Action("Create","Users")" class="">
+                                                <div class="text">Add new user</div>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+                                </li>
+
+
+                                <li class="menu-item">
+                                    <a href="report.html" class="">
+                                        <div class="icon"><i class="icon-pie-chart"></i></div>
+                                        <div class="text">Report</div>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+
+                        <div class="center-item">
+                            <div class="center-heading">Connect us</div>
+                            <ul class="wg-social">
+                                <li>
+                                    <a href="#"><i class="icon-facebook"></i></a>
+                                </li>
+                                <li class="active">
+                                    <a href="#"><i class="icon-twitter"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="icon-linkedin"></i></a>
+                                </li>
+                                <li>
+                                    <a href="#"><i class="icon-instagram"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="bot text-center">
+                        <div class="wrap">
+                            <div class="mb-20">
+                                <img src="images/menu-left/img-bot.png" alt="">
+                            </div>
+                            <div class="mb-20">
+                                <h6>Xin chào, chúng tôi có thể giúp gì?</h6>
+                                <div class="text">Hãy liên hệ với chúng tôi nếu bạn có bất kỳ sự trợ giúp nào, chúng tôi sẽ liên hệ với bạn trong thời gian sớm nhất</div>
+                            </div>
+                            <a href="#" class="tf-button w-full">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <!-- /section-menu-left -->
+                <!-- section-content-right -->
+                <div class="section-content-right">
+                    <!-- header-dashboard -->
+                    <div class="header-dashboard">
+                        <div class="wrap">
+                            <div class="header-left">
+                                <a href="@Url.Action("Dashboard","Admin")">
+                                    <img style="margin-right: 82px; width: 68px; height: 44px; display: block; outline: none; border-radius:10px; " src="~/assets/images/logo.jpg" alt="logo__image">
+                                </a>
+                                <div class="button-show-hide">
+                                    <i class="icon-menu-left"></i>
+                                </div>
+
+                            </div>
+                            <div class="header-grid">
+                                <div class="header-item country">
+                                    <img class="image-select " src="~/assets/images/flag/vietnam.png" />
+                                </div>
+                                <div class="header-item button-dark-light">
+                                    <i class="icon-moon"></i>
+                                </div>
+
+
+                                <div class="header-item button-zoom-maximize">
+                                    <div class="">
+                                        <i class="icon-maximize"></i>
+                                    </div>
+                                </div>
+
+                                <div class="popup-wrap user type-header">
+                                    <div class="dropdown">
+                                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton3" data-bs-toggle="dropdown" aria-expanded="false">
+                                            <span class="header-user wg-user">
+                                                <span class="image">
+                                                    <img src="~/assets/images/avatar/man-avatar.png" alt="">
+                                                </span>
+                                                <span class="flex flex-column">
+                                                    <span class="body-title mb-2">Trần Thế Anh</span>
+                                                    <span class="text-tiny">Admin</span>
+                                                </span>
+                                                <span class="flex flex-column">
+                                                    <span class="body-title mb-2"><b><a href="@Url.Action("Logout","Admin")">Logout</a></b> </span>
+                                                </span>
+                                            </span>
+                                        </button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <!-- /header-dashboard -->
+                    <!-- main-content -->
+                    <div class="main-content">
+                        @RenderBody();
+                    </div>
+                       
+                
+                   
+                    <!-- /main-content -->
+                </div>
+                <!-- /section-content-right -->
+            </div>
+            <!-- /layout-wrap -->
+        </div>
+        <!-- /#page -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- Javascript -->
+    <script src="~/assets/js/jquery.min.js"></script>
+    <script src="~/assets/js/bootstrap.min.js"></script>
+    <script src="~/assets/js/bootstrap-select.min.js"></script>
+    <script src="~/assets/js/zoom.js"></script>
+    <script src="~/assets/js/apexcharts/apexcharts.js"></script>
+    <script src="~/assets/js/apexcharts/line-chart-1.js"></script>
+    <script src="~/assets/js/apexcharts/line-chart-2.js"></script>
+    <script src="~/assets/js/apexcharts/line-chart-3.js"></script>
+    <script src="~/assets/js/apexcharts/line-chart-4.js"></script>
+    <script src="~/assets/js/apexcharts/line-chart-5.js"></script>
+    <script src="~/assets/js/apexcharts/line-chart-6.js"></script>
+    <script src="~/assets/js/switcher.js"></script>
+    <script src="~/assets/js/theme-settings.js"></script>
+    <script src="~/assets/js/main.js"></script>
+
+</body>
+
+
+<!-- Mirrored from themesflat.co/html/remos/index.html by HTTrack Website Copier/3.x [XR&CO'2014], Thu, 28 Mar 2024 14:59:48 GMT -->
+</html>
+

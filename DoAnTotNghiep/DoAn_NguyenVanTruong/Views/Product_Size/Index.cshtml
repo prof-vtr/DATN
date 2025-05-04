@@ -1,0 +1,98 @@
+﻿
+@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<DoAnNguyenVanTruong.Models.Product_Size>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Danh sách sản phẩm trong kho</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="/Admin/Dashboard"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="#"><div class="text-tiny">Quản lý</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Quản lý kho</div>
+                </li>
+            </ul>
+        </div>
+        <!-- all-attribute -->
+        <div class="wg-box">
+            <div class="flex items-center justify-between gap10 flex-wrap">
+
+                <a class="tf-button style-1 w208" href="/Product_Size/Create"><i class="icon-plus"></i>Thêm mới</a>
+            </div>
+            <div class="wg-table table-all-attribute">
+                <ul class="table-title flex gap20 mb-14">
+                    <li>
+                        <div class="body-title">Sản phẩm</div>
+                    </li>
+                    <li>
+                        <div class="body-title" style="margin-left:120px; text-align:center;">Số lượng trong kho</div>
+                    </li>
+                    <li>
+                        <div class="body-title" style="margin-left:50px"></div>
+                    </li>
+                </ul>
+                <ul class="flex flex-column">
+
+                    @foreach (var item in Model)
+                    {
+                        <li class="product-item gap14">
+                            <div class="image no-bg">
+                                <img src="~/assets/images/product/@item.Product.Images" alt="">
+                            </div>
+                            <div class="flex items-center justify-between gap20 flex-grow">
+                                <div class="name" style="min-width:500px;">
+                                    <a href="@Url.Action("Details", "Product_Size", new {id=item.Product_SizeID})" class="body-title-2">@item.Product.ProductName</a>
+                                </div>
+                                <div class="body-text">@item.Quantity</div>
+                                <div class="list-icon-function">
+                                    <div class="item eye">
+                                        <a href="@Url.Action("Details","Product_Size", new {id=item.Product_SizeID})"><i class="icon-eye"></i></a>
+                                    </div>
+                                    <div class="item edit">
+                                        <a href="@Url.Action("Edit","Product_Size", new {id=item.Product_SizeID})"><i class="icon-edit-3"></i></a>
+                                    </div>
+                                    <div class="item trash">
+                                        <a href="@Url.Action("Delete","Product_Size", new {id=item.Product_SizeID})"><i class="icon-trash-2"></i></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    }
+
+
+                </ul>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between flex-wrap gap10">
+                <div class="text-tiny"></div>
+                <ul class="wg-pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, PageSize = 8 }))
+                </ul>
+            </div>
+        </div>
+        <!-- /all-attribute -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>

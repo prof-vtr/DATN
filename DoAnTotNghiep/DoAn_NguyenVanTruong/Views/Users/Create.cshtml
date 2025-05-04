@@ -1,0 +1,111 @@
+﻿@model DoAnNguyenVanTruong.Models.User
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Add New User</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="/Admin/Dashboard"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="/Users"><div class="text-tiny">Tài khoản</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Thêm mới tài khoản</div>
+                </li>
+            </ul>
+        </div>
+        <!-- add-new-user -->
+        <form action="/Users/Create" method="post" class="form-add-new-user form-style-2">
+            @Html.AntiForgeryToken()
+            <div class="wg-box">
+                <div class="left">
+                    <h5 class="mb-4">Account</h5>
+                    <div class="body-text">Nhập thông tin tài khoản mới</div>
+                </div>
+                <div class="right flex-grow">
+                    <fieldset class="name mb-24">
+                        <div class="body-title mb-10">Name</div>
+                        <input class="flex-grow" type="text" placeholder="Username" name="Username" tabindex="0" value="" aria-required="true" required="">
+                    </fieldset>
+                    <fieldset class="email mb-24">
+                        <div class="body-title mb-10">Email</div>
+                        <input class="flex-grow" type="email" placeholder="Email" name="Email" tabindex="0" value="" aria-required="true" required="">
+                    </fieldset>
+                    <fieldset class="password mb-24">
+                        <div class="body-title mb-10">Password</div>
+                        <input class="password-input" type="password" placeholder="Enter password" name="Password" tabindex="0" value="" aria-required="true" required="">
+                        <span class="show-pass">
+                            <i class="icon-eye view"></i>
+                            <i class="icon-eye-off hide"></i>
+                        </span>
+                    </fieldset>
+                    <fieldset class="password">
+                        <div class="body-title mb-10">Confirm password</div>
+                        <input class="password-input" type="password" placeholder="Confirm password" name="PasswordConfirm" tabindex="0" value="" aria-required="true" required="">
+                        <span class="show-pass">
+                            <i class="icon-eye view"></i>
+                            <i class="icon-eye-off hide"></i>
+                        </span>
+                    </fieldset>
+                </div>
+            </div>
+            <div class="wg-box">
+                <div class="left">
+
+                </div>
+                <div class="right flex-grow">
+                    <fieldset class="mb-24">
+                        <div class="body-title mb-10">Gender</div>
+                        <div class="radio-buttons">
+                            <div class="item">
+                                <input class="" type="radio" name="Gender" value="Nam" id="add-product1" checked>
+                                <label class="" for="add-product1"><span class="body-title-2">Nam</span></label>
+                            </div>
+                            <div class="item">
+                                <input class="" type="radio" name="Gender" value="Nu" id="add-product2">
+                                <label class="" for="add-product2"><span class="body-title-2">Nữ</span></label>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="mb-24">
+                        <div class="body-title mb-10">Role</div>
+                        <div class="radio-buttons">
+                            <div class="item">
+                                <input class="" type="radio" value="1" name="RoleID" id="update-product1" checked>
+                                <label class="" for="update-product1"><span class="body-title-2">Admin</span></label>
+                            </div>
+                            <div class="item">
+                                <input class="" type="radio" value="0" name="RoleID" id="update-product2">
+                                <label class="" for="update-product2"><span class="body-title-2">User</span></label>
+                            </div>
+                        </div>
+                    </fieldset>
+
+                </div>
+            </div>
+            <div class="bot">
+                <button class="tf-button w180" type="submit">Save</button>
+            </div>
+
+        </form>
+        <!-- /add-new-user -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>

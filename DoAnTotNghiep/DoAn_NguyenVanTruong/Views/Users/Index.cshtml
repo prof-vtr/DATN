@@ -1,0 +1,98 @@
+﻿﻿﻿﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<DoAnNguyenVanTruong.Models.User>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Danh sách tài khoản</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="/Admin/Dashboard"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="#"><div class="text-tiny">Tài khoản</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Danh sách tài khoản</div>
+                </li>
+            </ul>
+        </div>
+        <!-- all-user -->
+        <div class="wg-box">
+            <div class="flex items-center justify-between gap10 flex-wrap">
+
+               
+            </div>
+            <div class="wg-table table-all-user">
+                <ul class="table-title flex gap20 mb-14" style="min-width:151px;">
+                    <li>
+                        <div class="body-title">Tài khoản</div>
+                    </li>
+
+                    <li>
+                        <div class="body-title" style="margin-left:-30px;">Email</div>
+                    </li>
+                    <li>
+                        <div class="body-title"></div>
+                    </li>
+                </ul>
+                <ul class="flex flex-column" style="min-width:151px;">
+                    @foreach (var item in Model)
+                    {
+                        <li class="user-item gap14">
+                            <div class="image">
+                                <img src="~/assets/icon/user.png" alt="">
+                            </div>
+                            <div class="flex items-center justify-between gap20 flex-grow">
+                                <div class="name">
+                                    <a href="#" class="body-title-2">@item.Username</a>
+                                    <div class="text-tiny mt-3"></div>
+                                </div>
+                                <div class="body-text">@item.Email</div>
+
+                                <div class="list-icon-function">
+                                    <div class="item eye">
+                                        <a href="/Users/Details/@item.UserID">
+                                            <i class="icon-eye"></i>
+                                        </a>
+                                    </div>
+                                    <div class="item edit">
+                                        <a href="/Users/Edit/@item.UserID">
+                                            <i class="icon-edit-3"></i>
+                                        </a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </li>
+                    }
+                </ul>
+            </div>
+            <div class="divider"></div>
+            <div class="flex items-center justify-between flex-wrap gap10">
+                <div class="text-tiny"></div>
+                <ul class="wg-pagination">
+                    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, PageSize = 8 }))
+                </ul>
+            </div>
+        </div>
+        <!-- /all-user -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>

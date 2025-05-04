@@ -1,0 +1,21 @@
+﻿.nut a {
+    display: inline-block;
+    text-align: center;
+    padding: 5px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 5px;
+    color: black;
+    background-color: #fff;
+    text-decoration: none;
+    &:hover
+
+{
+    color: #fff;
+    background-color: #000;
+}
+
+&:active {
+    background-color: #ddd;
+}
+}

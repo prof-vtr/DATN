@@ -1,0 +1,234 @@
+﻿@model DoAnNguyenVanTruong.ViewModel.GridShopModel
+@{
+    ViewBag.Title = "GridShop";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--6" style="background-image: url('/assets/images/logo/bradcaump5.jpg') !important; background-repeat: no-repeat; background-size: cover; background-position: center center; }">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title" style="color: #333 !important">Shop</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="/" style="color: #333 !important">Trang chủ</a>
+                        <span class="brd-separetor" style="color: #333 !important">/</span>
+                        <span class="breadcrumb_item active">Shop</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+
+<!-- Start Shop Page -->
+<div class="page-shop-sidebar left--sidebar bg--white section-padding--lg">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-12 order-2 order-lg-1 md-mt-40 sm-mt-40">
+                <div class="shop__sidebar">
+
+                    <aside class="wedget__categories poroduct--cat">
+                        <h3 class="wedget__title">Danh sách hãng</h3>
+                        <ul>
+                            @foreach (var Category in Model.Categories)
+                            {
+                                <li><a href="@Url.Action("GridShop", "Page", new { categoryId = Category.CategoryID, page = 1 })">@Category.CategoryName <span>(@Category.Products.Count())</span></a></li>
+                            }
+                        </ul>
+                    </aside>
+
+                    <aside class="wedget__categories poroduct--tag">
+                        <h3 class="wedget__title">Sắp xếp theo</h3>
+                        <select class="shot__byselect w--100 mr-3 ml-0" id="sort-select" name="sortBy">
+                            <option selected value="">Sort by</option>
+                            <option value="priceAsc">Giá tăng dần</option>
+                            <option value="priceDesc">Giá giảm dần</option>
+                            <option value="nameAsc">Tên tăng dần</option>
+                            <option value="nameDesc">Tên giảm dần</option>
+                        </select>
+                    </aside>
+
+                    <aside class="wedget__categories poroduct--tag">
+                        <h3 class="wedget__title w--100 mr-3 ml-0 mt--40">Từ khoá</h3>
+                        <div class="input-group">
+                            <input class="form-control" name="keyword" placeholder="Từ khoá..."
+                                   type="text">
+                        </div>
+                        <div class="input-group mt--30">
+                            <button id="filter-btn" type="submit" class="mt-3 btn btn-dark" style="width: 100%">Lọc</button>
+                        </div>
+                    </aside>
+
+                    @*<aside class="wedget__categories pro--range">
+                        <h3 class="wedget__title">Lọc theo giá</h3>
+                        <div class="content-shopby">
+                            <div class="price_filter s-filter clear">
+                                <div id="slider-range"></div>
+                                <div class="slider__range--output">
+                                    <div class="price__output--wrap">
+                                        <div class="price--output">
+                                            <span>Giá cả: </span><input style="width: 185px" type="text" id="amount" readonly="">
+                                            <input style="width: 185px" type="text" id="amount" readonly="">
+                                            <input type="hidden" id="minPrice" name="minPrice" value="@ViewBag.MinPrice" />
+                                            <input type="hidden" id="maxPrice" name="maxPrice" value="@ViewBag.MaxPrice" />
+                                        </div>
+                                        <div class="input-group">
+                                            <button type="submit" class="mt-3 btn btn-dark" style="width: 100%">Lọc</button>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </aside>*@
+                </div>
+            </div>
+            <div class="col-lg-9 col-12 order-1 order-lg-2">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="shop__list__wrapper d-flex flex-wrap flex-md-nowrap justify-content-between">
+                            <div class="shop__list nav justify-content-center" role="tablist">
+                                <a class="nav-item nav-link active" data-toggle="tab" href="#nav-grid" role="tab"><i class="fa fa-th"></i></a>
+                                <a class="nav-item nav-link" data-toggle="tab" href="#nav-list" role="tab"><i class="fa fa-list"></i></a>
+                            </div>
+                            <p>Hiển thị kết quả tìm được @Html.Raw(Model.CategoryId)</p>
+                            <div class="orderby__wrapper">
+                                <span>Cửa hàng ZMobile</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="tab__container" id="productContainer">
+                    <div class="shop-grid tab-pane fade show active" id="nav-grid" role="tabpanel">
+                            <div class="row">
+                                @{
+                                    foreach (var product in Model.Products)
+                                    {
+                                        <!-- Start Single Product -->
+                                        <div class="product product__style--3 col-lg-4 col-md-4 col-sm-6 col-12">
+                                            <div class="product__thumb">
+                                                <a class="first__img" href="@Url.Action("DetailProduct","Page",new {productId = product.ProductID})"><img src="~/assets/images/product/@product.Images" alt="product image"></a>
+                                                @if (product.SaleOff != 0)
+                                                {
+                                                    <div class="hot__box">
+                                                        <span class="hot-label">SALE</span>
+                                                    </div>
+                                                }
+
+                                            </div>
+                                            <div class="product__content content--center content--center">
+                                                <h4><a href="@Url.Action("DetailProduct","Page",new {productId = product.ProductID})">@product.ProductName</a></h4>
+                                                <ul class="prize d-flex">
+                                                    <li>@String.Format("{0:0,0 đ}", product.newprice(product.Price, product.SaleOff))</li>
+                                                    <li class="old_prize">@String.Format("{0:0,0 đ}", product.Price)</li>
+                                                </ul>
+                                                <div class="action">
+                                                    <div class="actions_inner">
+                                                        <ul class="add_to_links">
+                                                            <li><a class="cart" href="cart.html"><i class="bi bi-shopping-bag4"></i></a></li>
+                                                            <li><a data-toggle="modal" title="Quick View" class="quickview modal-view detail-link" href="#productmodal"><i class="bi bi-search"></i></a></li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                                <div class="product__hover--content">
+                                                    <ul class="rating d-flex">
+                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                        <li class="on"><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                        <li><i class="fa fa-star-o"></i></li>
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <!-- End Single Product -->
+
+                                    }
+                                }
+                            </div>
+                            <ul class="wn__pagination">
+                                @for (int i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    <li class="@(Model.CurrentPage == i ? "active" : "")">
+                                        <a href="@Url.Action("GridShop", "Page", new { categoryId = Model.CategoryId, page = i, orderBy = Request.QueryString["orderBy"], keyword = Request.QueryString["keyword"] })">@i</a>
+                                    </li>
+                                }
+                            </ul>
+                    </div>
+                    <div class="shop-grid tab-pane fade" id="nav-list" role="tabpanel">
+                        <div class="list__view__wrapper">
+
+                            @{
+                                foreach (var product in Model.Products)
+                                {
+                                    <!-- Start Single Product -->
+                                    <div class="list__view mt--40">
+                                        <div class="thumb">
+                                            <a class="first__img" href="@Url.Action("DetailProduct","Page",new {productId = product.ProductID})"><img src="~/assets/images/product/@product.Images" alt="product images"></a>
+                                        </div>
+                                        <div class="content">
+                                            <h2><a href="@Url.Action("DetailProduct","Page",new {productId = product.ProductID})">@product.ProductName</a></h2>
+                                            <ul class="prize__box">
+                                                <li> @String.Format("{0:0,0 đ}", product.newprice(product.Price, product.SaleOff))</li>
+                                                <li class="old__prize">@String.Format("{0:0,0 đ}", product.Price)</li>
+                                            </ul>
+                                            <p>@product.Description</p>
+                                            <ul class="cart__action d-flex">
+                                                <li class="cart"><a href="cart.html">Add to cart</a></li>
+
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <!-- End Single Product -->
+
+                                }
+                            }
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Shop Page -->
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#filter-btn').click(function (e) {
+            e.preventDefault();
+
+            // Lấy giá trị từ input và select
+            var keyword = $('input[name="keyword"]').val();
+            var sortBy = $('#sort-select').val();
+            var categoryId = '@Model.CategoryId';
+            var page = 1;  // Khi lọc sẽ quay về trang 1
+
+            // Gửi yêu cầu Ajax
+            $.ajax({
+                url: '@Url.Action("GridShop", "Page")',
+                type: 'GET',
+                data: {
+                    categoryId: categoryId,
+                    keyword: keyword,
+                    orderBy: sortBy,
+                    page: page
+                },
+                success: function (result) {
+                    // Cập nhật nội dung của container sản phẩm
+                    $('#productContainer').html($(result).find('#productContainer').html());
+                },
+                error: function (xhr, status, error) {
+                    alert('Đã có lỗi xảy ra, vui lòng thử lại sau.');
+                }
+            });
+        });
+    });
+</script>
+
+
+

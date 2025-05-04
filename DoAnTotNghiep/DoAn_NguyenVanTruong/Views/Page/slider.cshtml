@@ -1,0 +1,21 @@
+﻿@model IEnumerable<DoAnNguyenVanTruong.Models.Slide> 
+<div class="owl-carousel owl-theme">
+    @foreach (var item in Model)
+    {
+        <div class="owl-slide cover">
+            <img src="~/assets/images/slide/@item.Images" />
+            <div class="opacity-mask d-flex align-items-center" data-opacity-mask="rgba(0, 0, 0, 0.5)">
+                <div class="container">
+                    <div class="row justify-content-center justify-content-md-end">
+                        <div class="col-lg-6 static">
+                            <div class="slide-text text-end white">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+
+    

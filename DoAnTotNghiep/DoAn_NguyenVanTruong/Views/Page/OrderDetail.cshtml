@@ -1,0 +1,206 @@
+﻿@model DoAnNguyenVanTruong.ViewModel.OrderDetail2Model
+@{
+    ViewBag.Title = "OrderDetail";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+
+
+<style>
+    /* Reset some default table styles */
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        table-layout: fixed;
+    }
+
+    /* Style for the table header row */
+    thead th {
+        text-align: left;
+        background-color: #f2f2f2;
+        padding: 10px;
+        font-weight: bold;
+    }
+
+    /* Style for the table data rows */
+    tbody td {
+        padding: 10px;
+        border-bottom: 1px solid #ddd;
+    }
+
+    /* Style for the product image cell */
+    .product-thumbnail img {
+        max-width: 100px;
+        height: auto;
+        display: block;
+        margin: 0 auto;
+    }
+
+    /* Center the product name */
+    .product-name {
+        text-align: center;
+    }
+
+    /* Style for product price and subtotal cells */
+    .product-price,
+    .product-subtotal {
+        text-align: center;
+    }
+
+    /* Style for the product quantity cell */
+    .product-quantity {
+        text-align: center;
+    }
+
+    /* Style for the order details header section */
+    .order-details-header {
+        margin-bottom: 20px;
+    }
+
+        /* Style for the order details header section p tags */
+        .order-details-header p {
+            margin: 5px 0;
+        }
+
+    .cancel-order-btn {
+        display: inline-block;
+        margin: 10px auto;
+        padding: 8px 15px;
+        background-color: orange;
+        text-decoration: none;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+        .cancel-order-btn:hover {
+            background-color: #cc0000;
+            color: black;
+        }
+
+</style>
+
+<!-- Start Bradcaump area -->
+<div class="ht__bradcaump__area bg-image--6" style="background-image: url('/assets/images/logo/bradcaump5.jpg') !important; background-repeat: no-repeat; background-size: cover; background-position: center center; }">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="bradcaump__inner text-center">
+                    <h2 class="bradcaump-title" style="color: #333 !important">Chi tiết đơn hàng</h2>
+                    <nav class="bradcaump-content">
+                        <a class="breadcrumb_item" href="/Page/Index" style="color: #333 !important">Trang chủ</a>
+                        <span class="brd-separetor" style="color: #333 !important">/</span>
+                        <span class="breadcrumb_item active">Chi tiết đơn hàng</span>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Bradcaump area -->
+<!-- order-details-main-area start -->
+<div class="wishlist-area section-padding--lg bg__white">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                <div class="wishlist-content">
+                    <div class="order-details-header" style="font-size: 16px !important">
+                        <h3 class="mb-4">Chi tiết đơn hàng</h3>
+                        <p class="mb-4"><strong>Mã đơn hàng: </strong> <span>@Model.Order.OrderCode</span></p>
+                        <p class="mb-4"><strong>Tên người nhận: </strong> <span>@Model.Order.CustomerName</span></p>
+                        <p class="mb-4">
+                            <strong>Địa chỉ: </strong>@Model.Order.Address_Delivery<span></span>
+                        </p>
+                        <p class="mb-4">
+                            <strong>Ngày tạo: </strong>@Model.Order.OrderDate.ToString("hh:mm:ss dd/MM/yyyy")<span></span>
+                        </p>
+                        <p class="mb-4">
+                            <strong>Tổng tiền: </strong>@String.Format("{0:0,0 đ}", @Model.Order.OrderTotalPrice)<span></span>
+                        </p>
+                        <p class="mb-4">
+                            <strong>Trạng thái: </strong>@{
+                                string status = "";
+                                if (Model.Order.OrderStatus == "0")
+                                {
+                                    status = "Chưa thanh toán";
+                                }
+                                else if (Model.Order.OrderStatus == "1")
+                                {
+                                    status = "Đã thanh toán";
+                                }
+                                else if (Model.Order.OrderStatus == "2")
+                                {
+                                    status = "Đã xác nhận";
+                                }
+                                else if (Model.Order.OrderStatus == "3")
+                                {
+                                    status = "Đang giao hàng";
+                                }
+                                else if (Model.Order.OrderStatus == "4")
+                                {
+                                    status = "Đã giao hàng";
+                                }
+                                else if (Model.Order.OrderStatus == "5")
+                                {
+                                    status = "Đã huỷ";
+                                }
+                            }<span>@status</span>
+                        </p>
+                        <p class="mb-4">
+                            <strong>Phương thức: </strong>@{
+                                string method = "";
+                                if (Model.Order.TypePayment == 0)
+                                {
+                                    method = "COD";
+                                }
+                                if (Model.Order.TypePayment == 1)
+                                {
+                                    method = "VNPAY";
+                                }
+                            }
+                            @method<span></span>
+                        </p>
+                        <p class="mb-4">
+                            <strong>Số điện thoại: </strong>@Model.Order.PhoneCustomer<span></span>
+                        </p>
+                        @if (Model.Order.OrderStatus != "5")
+                        {
+                            <a class="btn btn-danger cancel-order-btn mb-4" onclick="cancelOrder(@Model.Order.OrderID)">Huỷ đơn</a>
+                        }
+
+                        @* <a class="btn btn-success mb-4">Received</a> *@
+                    </div>
+                    <div class="order-details-table wnro__table table-responsive">
+                        <table class="mt-3">
+                            <thead>
+                                <tr>
+                                    <th class="product-name">Sản phẩm</th>
+                                    <th class="product-name">Tên sản phẩm</th>
+                                    <th class="product-price">Giá lẻ</th>
+                                    <th class="product-quantity">Số lượng</th>
+                                    <th class="product-subtotal">Tổng giá</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model.Order.OrderDetails)
+                                {
+                                    <tr>
+                                        <td class="product-thumbnail">
+                                            <img alt="Product Image" src="~/assets/images/product/@item.Product_Size.Product.Images" />
+                                        </td>
+                                        <td class="product-name">@item.Product_Size.Product.ProductName</td>
+                                        <td class="product-price">
+                                            @String.Format("{0:0,0 đ}", item.Product_Size.Product.newprice(item.Product_Size.Product.Price, item.Product_Size.Product.SaleOff))
+                                        </td>
+                                        <td class="product-quantity">@item.OrderQuantity</td>
+                                        <td class="product-subtotal">@String.Format("{0:0,0 đ}", @item.OrderQuantity * item.Product_Size.Product.newprice(item.Product_Size.Product.Price, item.Product_Size.Product.SaleOff))</td>
+                                    </tr>
+                                }
+                            </tbody>
+
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- order-details-main-area end -->

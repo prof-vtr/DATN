@@ -1,0 +1,62 @@
+﻿@model DoAnNguyenVanTruong.Models.Product_Size
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Sửa thông tin kho</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="/Admin/Dashboard"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="#"><div class="text-tiny">Quản lý</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Quản lý kho</div>
+                </li>
+            </ul>
+        </div>
+        <!-- new-attribute -->
+        <div class="wg-box">
+            <form action="/Product_Size/Edit" method="post" class="form-new-product form-style-1">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.ProductID)
+                <fieldset class="name">
+                    <div class="body-title">sản phẩm</div>
+                    <input class="flex-grow" type="text" placeholder="Size" name="ProductID" tabindex="0" value="@Model.Product.ProductName" aria-required="true" required="" readonly>
+                </fieldset>
+                @*<fieldset class="name">
+                    <div class="body-title">Size</div>
+                    <input class="flex-grow" type="text" placeholder="Size" name="SizeID" tabindex="0" value="@Model.Size.NameSize" aria-required="true" required="" readonly>
+                </fieldset>*@
+                <fieldset class="name">
+                    <div class="body-title">Số lượng trong kho</div>
+                    <input class="flex-grow" type="text" placeholder="Số lượng trong kho" name="Quantity" tabindex="0" value="@Model.Quantity" aria-required="true" required="">
+                </fieldset>
+                <div class="bot">
+                    <div></div>
+                    <button class="tf-button w208" >Lưu</button>
+                </div>
+            </form>
+        </div>
+        <!-- /new-category -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>

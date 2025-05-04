@@ -1,0 +1,57 @@
+﻿﻿@using PagedList.Mvc;
+@using PagedList;
+@model IPagedList<DoAnNguyenVanTruong.Models.Product>
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+<div class="container margin_60_35">
+    <div class="main_title">
+        <h2>Top Selling</h2>
+        <span>Products</span>
+        <p>Cum doctus civibus efficiantur in imperdiet deterruisset</p>
+    </div>
+    <div class="row small-gutters">
+        @foreach (var product in Model)
+        {
+            <div class="col-6 col-md-4 col-xl-3">
+                <div class="grid_item">
+                    <figure>
+                        <span class="ribbon off">@product.SaleOff %</span>
+                        <a href="@Url.Action("DetailProduct","Page",new {id=product.ProductID})">
+                            <img class="img-fluid lazy" src="~/assets/images/product/@product.Images" alt="" style="width:400px; height400px;">
+                            <img class="img-fluid lazy" src="~/assets/images/product/@product.Images" alt="" style="width:400px; height400px;">
+                        </a>
+
+                    </figure>
+                    <div class="rating"><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star voted"></i><i class="icon-star"></i></div>
+                    <a href="~/assets/product-detail-1.html">
+                        <h3>@product.ProductName</h3>
+                    </a>
+                    <div class="price_box">
+                        <span class="new_price">
+                            @product.newprice(product.Price, product.SaleOff);
+                        </span>
+                        <span class="old_price">@product.Price</span>
+                    </div>
+                    <ul>
+                        <li><a href="@Url.Action("AddtoCart","Cartbuy", new {id=product.ProductID})" class="tooltip-1" data-bs-toggle="tooltip" data-bs-placement="left" title="Add to cart"><i class="ti-shopping-cart"></i><span>Add to cart</span></a></li>
+                    </ul>
+                </div>
+                <!-- /grid_item -->
+            </div>
+        }
+
+        <!-- /col -->
+        <!-- /col -->
+    </div>
+
+</div>
+
+<!-- /container -->
+
+<div style="text-align:center;">
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, PageSize = 8 }))
+
+</div>
+

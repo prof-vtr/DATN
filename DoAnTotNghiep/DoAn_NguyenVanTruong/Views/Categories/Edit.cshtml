@@ -1,0 +1,78 @@
+﻿@model DoAnNguyenVanTruong.Models.Category
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Thông tin thương hiệu</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="@Url.Action("Dashboard","Admin")"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="@Url.Action("Index","Categories")"><div class="text-tiny">thương hiệu</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Sửa thương hiệu</div>
+                </li>
+            </ul>
+        </div>
+        <!-- new-category -->
+        <div class="wg-box">
+            <form action="/Categories/Edit" method="post" enctype="multipart/form-data" class="form-new-product form-style-1">
+                @Html.AntiForgeryToken()
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.CategoryID)
+                <fieldset class="name">
+                    <div class="body-title">Tên thương hiệu <span class="tf-color-1">*</span></div>
+                    <input class="flex-grow" type="text" placeholder="Category name" name="CategoryName" tabindex="0" value="@Model.CategoryName" aria-required="true" required="">
+                </fieldset>
+                <fieldset>
+                    <div class="body-title">Upload Ảnh <span class="tf-color-1">*</span></div>
+                    <div class="upload-image flex-grow">
+                        <div class="item up-load">
+                            <div class="item">
+                                <img id="output" src="~/assets/images/category/@Model.Images" alt="" style="border-radius: 12px; border: 1px solid #ECF0F4" />
+                            </div>
+                            <label class="uploadfile" for="myFile">
+                                <span class="icon">
+                                    <i class="icon-upload-cloud"></i>
+                                </span>
+                                <span class="text-tiny"><span class="tf-color">Tải file lên</span></span>
+                                <input name="ImageFile" id="myFile" type="file" onchange="LoadFile(event)" />
+                            </label>
+                        </div>
+                    </div>
+                </fieldset>
+
+
+                <div class="bot">
+                    <div></div>
+                    <button class="tf-button w208" type="submit">Lưu</button>
+                </div>
+            </form>
+        </div>
+        <!-- /new-category -->
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>
+<script>
+    var LoadFile = function (event) {
+        var image = document.getElementById("output");
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>

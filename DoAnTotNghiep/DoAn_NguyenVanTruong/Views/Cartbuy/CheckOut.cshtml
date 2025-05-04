@@ -1,0 +1,99 @@
+﻿@model IEnumerable<DoAnNguyenVanTruong.Models.CartItem>
+@{
+    ViewBag.Title = "CheckOut";
+    Layout = "~/Views/Shared/LayoutPage.cshtml";
+}
+@ViewBag.prosizeid
+<link href="css/checkout.css" rel="stylesheet">
+
+<!-- YOUR CUSTOM CSS -->
+<link href="css/custom.css" rel="stylesheet">
+
+@using (Html.BeginForm("CheckOut", "Cartbuy", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-lg-4 col-md-6">
+            <div class="step first" style="margin-left:10px">
+                <h3>1. Thông tin nhận hàng</h3>
+
+                <div class="tab-content checkout">
+                    <div class="tab-pane fade show active" id="tab_1" role="tabpanel" aria-labelledby="tab_1">
+                        <hr>
+                        <div class="row no-gutters">
+                            <div class="col-6 form-group pr-1">
+                                <input type="text" class="form-control" name="Name" placeholder="Họ và tên" style="width:210%;" required>
+                            </div>
+
+                        </div>
+                        <!-- /row -->
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Address_Delivery" placeholder="Địa chỉ giao hàng" required>
+                        </div>
+
+                        <!-- /row -->
+                        <!-- /row -->
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="Phone" placeholder="Số điện thoại" required>
+                        </div>
+
+                    </div>
+                    <!-- /tab_1 -->
+                    <!-- /tab_2 -->
+                </div>
+            </div>
+            <!-- /step -->
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="step middle payments">
+                <h3>2. Phương thức thanh toán </h3>
+                <ul style="list-style-type: none; margin-top:70px;">
+                    <li style="display: flex; border-style: double; border-radius: 10px; height: 70px;">
+                        <label style="display: flex; height: 50px; margin-top: 20px; " class="container_radio">
+                            COD <img src="~/assets/icon/iconpay/cod.png" style="width: 50px; height: 100%; margin-left: 330px; margin-top: -12px; border-style: double; border-color: black; border-radius: 10px; " />
+                            <input type="radio" value="0" name="TypePayment" checked>
+                            <span class="checkmark"></span>
+                        </label>
+                    </li>
+                    <li style="display: flex; border-style: double; border-radius: 10px; height: 70px;">
+                        <label style="display: flex; height: 50px; margin-top: 20px; " class="container_radio">
+                            VNPAY<a href="#0"><img src="~/assets/icon/iconpay/vnpay.png" style="width: 50px; height: 100%; margin-left: 315px; margin-top: -12px; border-style: double; border-color: black; border-radius: 10px; " /></a>
+                            <input type="radio" value="1" name="TypePayment">
+                            <span class="checkmark"></span>
+                        </label>
+                    </li>
+
+                </ul>
+
+
+            </div>
+            <!-- /step -->
+
+        </div>
+        <div class="col-lg-4 col-md-6">
+            <div class="step last">
+                <h3>3. Nội dung đơn hàng</h3>
+                <div class="box_general summary">
+                    @foreach (var item in Model)
+                    {
+                        <ul>
+                            <li class="clearfix">
+                                <img src="~/assets/images/product/@item.Product_Size.Product.Images" width="30px" height="30px" />
+                                <em>@item.QuantityProductSale &nbsp; @item.Product_Size.Product.ProductName</em>
+                                &nbsp; Size: @item.Product_Size.Size.NameSize &nbsp;
+                                <span>@String.Format("{0:0,0 VND}", item.Product_Size.Product.newprice(item.Product_Size.Product.Price, item.Product_Size.Product.SaleOff))</span>
+                            </li>
+                        </ul>
+                    }
+
+
+                    <div class="total clearfix">Tổng tiền:&nbsp; <span>@String.Format("{0:0,0 VND}", ViewBag.totalmoney)</span></div>
+                    <input type="submit" value="Thanh toán" class="btn_1 full-width" />
+
+                </div>
+                <!-- /box_general -->
+            </div>
+            <!-- /step -->
+        </div>
+    </div>
+
+}

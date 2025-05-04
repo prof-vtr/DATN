@@ -1,0 +1,124 @@
+﻿@model DoAnNguyenVanTruong.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/LayoutAdmin.cshtml";
+}
+<div class="main-content-inner">
+    <!-- main-content-wrap -->
+    <div class="main-content-wrap">
+        <div class="flex items-center flex-wrap justify-between gap20 mb-27">
+            <h3>Thông tin sản phẩm mới</h3>
+            <ul class="breadcrumbs flex items-center flex-wrap justify-start gap10">
+                <li>
+                    <a href="/Admin/Dashboard"><div class="text-tiny">Trang chủ</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <a href="/Products/Index"><div class="text-tiny">Sản phẩm</div></a>
+                </li>
+                <li>
+                    <i class="icon-chevron-right"></i>
+                </li>
+                <li>
+                    <div class="text-tiny">Thêm mới sản phẩm</div>
+                </li>
+            </ul>
+        </div>
+        <!-- form-add-product -->
+        <form action="/Products/Create" enctype="multipart/form-data" method="post" class="tf-section-2 form-add-product">
+            @Html.AntiForgeryToken()
+            <div class="wg-box">
+                <fieldset class="name">
+                    <div class="body-title mb-10">Tên sản phẩm <span class="tf-color-1">*</span></div>
+                    <input class="mb-10" type="text" placeholder="Nhập tên sản phẩm" name="ProductName" tabindex="0" value="" aria-required="true" required="">
+
+                </fieldset>
+
+                <div class="gap22 cols">
+                    <fieldset class="category">
+                        <div class="body-title mb-10">Danh mục <span class="tf-color-1">*</span></div>
+                        <div class="select">
+                            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.CategoryID, "", new { @class = "text-danger" })
+                        </div>
+                    </fieldset>
+                    <fieldset class="male">
+                        <div class="body-title mb-10">Thương hiệu <span class="tf-color-1">*</span></div>
+                        <div class="select">
+                            @Html.DropDownList("BrandID", null, htmlAttributes: new { @class = "" })
+                            @Html.ValidationMessageFor(model => model.BrandID, "", new { @class = "text-danger" })
+                        </div>
+                    </fieldset>
+                </div>
+
+                <fieldset class="description">
+                    <div class="body-title mb-10">Mô tả sản phẩm <span class="tf-color-1">*</span></div>
+                    <textarea class="mb-10" name="Description" placeholder="Mô tả" tabindex="0" aria-required="true" required=""></textarea>
+
+                </fieldset>
+            </div>
+            <div class="wg-box">
+                <fieldset>
+                    <div class="body-title mb-10">Upload Ảnh</div>
+                    <div class="upload-image mb-16">
+                        <div class="item">
+                            <img id="output" src="~/assets/images/product/" alt="" style="border-radius: 12px; border: 1px solid #ECF0F4" />
+                        </div>
+                        <div class="item up-load">
+                            <label class="uploadfile" for="myFile">
+                                <span class="icon">
+                                    <i class="icon-upload-cloud"></i>
+                                </span>
+                                <span class="text-tiny"> <span class="tf-color">Tải file lên</span></span>
+                                <input name="ImageFile" id="myFile" type="file" onchange="LoadFile(event)" />
+                            </label>
+                        </div>
+                    </div>
+
+                </fieldset>
+                <div class="cols gap22">
+                    <fieldset class="name">
+                        <div class="body-title mb-10">Giảm giá</div>
+                        <div class=" mb-10">
+                            <input type="text" name="SaleOff" placeholder="Giảm giá" />
+                        </div>
+
+                    </fieldset>
+                    <fieldset class="name">
+                        <div class="body-title mb-10">Giá sản phẩm</div>
+                        <div class="">
+                            <input type="text" name="Price" placeholder="Giá sản phẩm">
+                        </div>
+                    </fieldset>
+                </div>
+
+                <div class="cols gap10">
+                    <button class="tf-button w-full" type="submit">Add product</button>
+
+                    <!-- /form-add-product -->
+                </div>
+            </div>
+        </form>
+        <div style="margin-top:20px;">
+            <a href="@Url.Action("Index","Products")" class="tf-button style-1 w-full" type="submit">Product List</a>
+        </div>
+
+
+
+
+    </div>
+    <!-- /main-content-wrap -->
+</div>
+<div class="bottom-page">
+    <div class="body-text">Copyright © 2024 Mobile</div>
+    <i class="icon-heart"></i>
+</div>
+<script>
+    var LoadFile = function (event) {
+        var image = document.getElementById("output");
+        image.src = URL.createObjectURL(event.target.files[0]);
+    };
+</script>
