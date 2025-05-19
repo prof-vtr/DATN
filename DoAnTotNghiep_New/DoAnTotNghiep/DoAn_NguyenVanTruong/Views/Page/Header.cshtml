@@ -1,0 +1,100 @@
+﻿
+<!-- Header -->
+<header id="wn__header" class="header__area header__absolute sticky__header">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                <div class="logo">
+                    <a href="/">
+                        <img src="~/assets/images/logo/logo7.jpg" alt="logo images">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8 d-none d-lg-block">
+                <nav class="mainmenu__nav">
+                    <ul class="meninmenu d-flex justify-content-start">
+                        <li class="drop with--one--item"><a href="/">Home</a></li>
+
+                        <li class="drop">
+                            <a href="#">Hãng</a>
+                            <div class="megamenu dropdown">
+                                <ul class="item item01">
+                                    @foreach (var item in Model.Categories)
+                                    {
+                                        <li><a href = "@Url.Action("GridShop", "Page", new { categoryId = item.CategoryName, page = 1 })">@item.CategoryName</a></li>
+                                    }
+                                </ul>
+                            </div>
+                        </li>
+
+
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </nav>
+            </div>
+            <div class="col-md-6 col-sm-6 col-6 col-lg-2">
+                <ul class="header__sidebar__right d-flex justify-content-end align-items-center">
+
+
+                    @if (Session["UserID"] != null)
+                    {
+                        List<DoAnNguyenVanTruong.Models.OrderDetail> carts = Session["Cart"] as List<DoAnNguyenVanTruong.Models.OrderDetail>;
+                        int cartItemCount = carts != null ? carts.Count : 0;
+                        <li class="shopcart ml-3">
+                            <a class="cartbox_active" id="cart" href="@Url.Action("Detail_Order","Page")"><span class="product_qun" id="cart-count">@cartItemCount</span></a>
+                        </li>
+                    }
+
+                    <li class="setting__bar__icon">
+                        <a class="setting__active" href="#"></a>
+                        <div class="searchbar__content setting__block">
+                            <div class="content-inner">
+                                @{
+                                    var userId = Session["UserID"] as int?;
+                                    var userRoleId = Session["Role"] as int?;
+                                    var userFullName = Session["UserEmail"];
+                                    if (userId == null)
+                                    {
+                                        <div class="switcher-currency">
+                                            <strong class="label switcher-label"><span><a href="@Url.Action("Login", "Page")">Sign In</a></span></strong>
+                                            <strong class="label switcher-label"><span><a href="@Url.Action("Register", "Page")">Create An Account</a></span></strong>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                            <div class="switcher-currency">
+                                @if (userRoleId == 0)
+                                {
+                                    <strong class="label switcher-label">
+                                        <span class="text-primary"><a href="@Url.Action("Dashboard","Admin")" class="text-primary">Admin</a></span>
+                                    </strong>
+
+                                }
+                                <strong class="label switcher-label">
+                                    <span><a>Hello, @userFullName</a></span>
+                                </strong>
+                                <strong class="label switcher-label">
+                                    <span class="text-danger"><a href="@Url.Action("UserListOrders", "Page")">Đơn hàng của tôi</a></span>
+                                </strong>
+                                <strong class="label switcher-label">
+                                    <span class="text-danger"><a href="@Url.Action("Logout", "Page")" class="text-danger">Log Out</a></span>
+                                </strong>
+                            </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </li>
+
+
+
+                </ul>
+            </div>
+        </div>
+        
+        <div class="mobile-menu d-block d-lg-none">
+        </div>
+        <!-- Mobile Menu -->
+    </div>
+</header>
+<!-- //Header -->
